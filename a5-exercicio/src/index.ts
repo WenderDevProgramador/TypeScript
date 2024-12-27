@@ -1,122 +1,235 @@
+type PlanetSituation = 'Habitado' | 'Habitável' | 'Inabitável' | 'Inexplorado';
 
-type PlanetSituation = 'Habitado' | 'Habitável' | 'Inabitável' | 'Inexplorado'
+type PlanetCoordinates = [number, number, number, number];
 
-type PlanetCoordinates = [number, number, number, number]
-
-type Planet = {
-    name: string,
-    coordinates: PlanetCoordinates,
-    situation: PlanetSituation,
-    satellites: string[]
+interface Planet {
+    name: string;
+    coordinates: PlanetCoordinates;
+    situation: PlanetSituation;
+    satellites: string[];
 }
 
-const planets: Planet[] = []
+const planets: Planet[] = [];
 
-function addPlanet(name: string, coordinates: PlanetCoordinates, situation: PlanetSituation) {
+// Funções auxiliares
+function isValidCoordinate(value: string | null): number {
+    const number = Number(value);
+    if (isNaN(number)) {
+        alert('Coordenada inválida. Por favor, insira um número.');
+        throw new Error('Coordenada inválida');
+    }
+    return number;
+}
+
+// Adicionar planeta
+function addPlanet(name: string, coordinates: PlanetCoordinates, situation: PlanetSituation): void {
     planets.push({
         name,
         coordinates,
         situation,
-        satellites: []
-    })
-
-    alert(`O planeta ${name} foi adicionado com sucesso!`)
+        satellites: [],
+    });
+    alert(`O planeta "${name}" foi adicionado com sucesso!`);
 }
 
-function findPlanet(name: string) {
-    const planet = planets.find(plane => plane.name === name)
-
-    return planet ?? false
+// Encontrar planeta
+function findPlanet(name: string): Planet | null {
+    return planets.find(planet => planet.name === name) || null;
 }
 
-function updateSituation(situation: PlanetSituation, planet: Planet) {
-    planet.situation = situation
-
-    alert(`A situação do planeta ${planet.name} foi atualizada para ${situation}.`)
+// Atualizar situação
+function updateSituation(situation: PlanetSituation, planet: Planet): void {
+    planet.situation = situation;
+    alert(`A situação do planeta "${planet.name}" foi atualizada para "${situation}".`);
 }
 
-function addSatellite(name: string, planet: Planet) {
-    planet.satellites.push(name)
-
-    alert(`O satélite ${name} foi adicionado ao planeta ${planet.name}.`)
+// Adicionar satélite
+function addSatellite(name: string, planet: Planet): void {
+    planet.satellites.push(name);
+    alert(`O satélite "${name}" foi adicionado ao planeta "${planet.name}".`);
 }
 
-function removeSatellite(name: string, planet: Planet) {
-    planet.satellites = planet.satellites.filter(satellite => satellite !== name)
-
-    alert(`O satelite ${name} foi removido do planeta ${planet.name}.`)
+// Remover satélite
+function removeSatellite(name: string, planet: Planet): void {
+    const initialLength = planet.satellites.length;
+    planet.satellites = planet.satellites.filter(satellite => satellite !== name);
+    if (planet.satellites.length < initialLength) {
+        alert(`O satélite "${name}" foi removido do planeta "${planet.name}".`);
+    } else {
+        alert(`O satélite "${name}" não foi encontrado no planeta "${planet.name}".`);
+    }
 }
 
-
-
-function promptValidSituation() {
-    let situation: PlanetSituation = 'Inexplorado'
-    let validSituation = false
+// Validar situação
+function promptValidSituation(): PlanetSituation {
+    let situation: PlanetSituation = 'Inexplorado';
+    let validSituation = false;
 
     while (!validSituation) {
-        const situationInput = prompt('Informe a situação do planeta?\n1 - Habitado\n2 - Habitável\n3 - Inabitável\n4 - Inexplorado')
+        const situationInput = prompt(
+            'Informe a situação do planeta:\n1 - Habitado\n2 - Habitável\n3 - Inabitável\n4 - Inexplorado'
+        );
 
         switch (situationInput) {
             case '1':
-                situation = 'Habitado'
-                validSituation = true
+                situation = 'Habitado';
+                validSituation = true;
                 break;
             case '2':
-                situation = 'Habitável'
-                validSituation = true
+                situation = 'Habitável';
+                validSituation = true;
                 break;
             case '3':
-                situation = 'Inabitável'
-                validSituation = true
+                situation = 'Inabitável';
+                validSituation = true;
                 break;
             case '4':
-                situation = 'Inexplorado'
-                validSituation = true
+                situation = 'Inexplorado';
+                validSituation = true;
                 break;
             default:
-                alert('Situação inválida!')
+                alert('Situação inválida! Por favor, escolha uma opção válida.');
                 break;
         }
     }
-
-    return situation
+    return situation;
 }
 
+// Validar planeta
+function promptValidPlanet(callbackfn: (planet: Planet) => void): void {
+    const planetName = prompt('Informe o nome do planeta:');
+    if (!planetName) {
+        alert('Nome inválido! Retornando ao menu.');
+        return;
+    }
 
-function promptValidPlanet(callbackfn: (Planet: Planet) => void) {
-    const planetName = prompt('Informe o nome do planeta:')
-    const planet = findPlanet(planetName)
-
+    const planet = findPlanet(planetName);
     if (planet) {
-        callbackfn(planet)
+        callbackfn(planet);
     } else {
-        alert(`Planeta não encontrado! Retornado ao menu.`)
+        alert(`Planeta "${planetName}" não encontrado!`);
     }
 }
 
-// Opções do Menu
+// Opções de menu
+function firstMenuOption(): void {
+    const name = prompt('Informe o nome do planeta:');
+    if (!name) {
+        alert('Nome inválido! Retornando ao menu.');
+        return;
+    }
 
-function firstMenuOption() {
-    const name = prompt('Informe o nome do planeta:')
-    const coordinateA = Number(prompt('Informe a primeira coordenada:'))
-    const coordinateB = Number(prompt('Informe a segunda coordenada:'))
-    const coordinateC = Number(prompt('Informe a terceira coordenada:'))
-    const coordinateD = Number(prompt('Informe a quarta coordenada:'))
+    try {
+        const coordinateA = isValidCoordinate(prompt('Informe a primeira coordenada:'));
+        const coordinateB = isValidCoordinate(prompt('Informe a segunda coordenada:'));
+        const coordinateC = isValidCoordinate(prompt('Informe a terceira coordenada:'));
+        const coordinateD = isValidCoordinate(prompt('Informe a quarta coordenada:'));
 
-    // Aqui a nossa função ajuda a ter um código mais organizado
-    const situation = promptValidSituation()
+        const situation = promptValidSituation();
 
-    const confirmation = confirm(`Confirma o registro do planeta ${name}?
-    Coordenadas: (${coordinateA}, ${coordinateB}, ${coordinateC}, ${coordinateD})
-    Situação: ${situation}`)
+        const confirmation = confirm(
+            `Confirma o registro do planeta "${name}"?\nCoordenadas: (${coordinateA}, ${coordinateB}, ${coordinateC}, ${coordinateD})\nSituação: ${situation}`
+        );
 
-    if (confirmation) {
-        addPlanet(name, [coordinateA, coordinateB, coordinateC, coordinateD], situation)
+        if (confirmation) {
+            addPlanet(name, [coordinateA, coordinateB, coordinateC, coordinateD], situation);
+        }
+    } catch {
+        alert('Erro ao registrar planeta. Retornando ao menu.');
     }
 }
 
+function secondMenuOption(): void {
+    promptValidPlanet(planet => {
+        const situation = promptValidSituation();
+        updateSituation(situation, planet);
+    });
+}
 
+function thirdMenuOption(): void {
+    promptValidPlanet(planet => {
+        const satellite = prompt('Informe o nome do satélite a ser adicionado:');
+        if (satellite) {
+            addSatellite(satellite, planet);
+        } else {
+            alert('Nome inválido! Retornando ao menu.');
+        }
+    });
+}
 
+function fourthMenuOption(): void {
+    promptValidPlanet(planet => {
+        const satellite = prompt('Informe o nome do satélite a ser removido:');
+        if (satellite) {
+            removeSatellite(satellite, planet);
+        } else {
+            alert('Nome inválido! Retornando ao menu.');
+        }
+    });
+}
 
+function fifthMenuOption(): void {
+    if (planets.length === 0) {
+        alert('Nenhum planeta registrado.');
+        return;
+    }
 
+    let list = 'Planetas:\n';
+    planets.forEach(planet => {
+        const [a, b, c, d] = planet.coordinates;
+        list += `
+        Nome: ${planet.name}
+        Coordenadas: (${a}, ${b}, ${c}, ${d})
+        Situação: ${planet.situation}
+        Satélites (${planet.satellites.length}):\n`;
 
+        planet.satellites.forEach(satellite => {
+            list += `  - ${satellite}\n`;
+        });
+    });
+    alert(list.trim());
+}
+
+// Menu principal
+function mainMenu(): void {
+    let userOption = 0;
+
+    while (userOption !== 6) {
+        const menu = `Menu:
+        1 - Registrar um novo planeta
+        2 - Atualizar situação do planeta
+        3 - Adicionar um satélite ao planeta
+        4 - Remover um satélite do planeta
+        5 - Listar todos os planetas
+        6 - Sair`;
+
+        userOption = Number(prompt(menu));
+
+        switch (userOption) {
+            case 1:
+                firstMenuOption();
+                break;
+            case 2:
+                secondMenuOption();
+                break;
+            case 3:
+                thirdMenuOption();
+                break;
+            case 4:
+                fourthMenuOption();
+                break;
+            case 5:
+                fifthMenuOption();
+                break;
+            case 6:
+                alert('Encerrando o sistema...');
+                break;
+            default:
+                alert('Opção inválida! Retornando ao menu principal.');
+                break;
+        }
+    }
+}
+
+// Iniciar o sistema
+mainMenu();
