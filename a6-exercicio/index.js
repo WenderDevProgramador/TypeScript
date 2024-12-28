@@ -18,36 +18,31 @@ function fetchUser(username) {
         }
         else {
             users.push(user);
-            alert(`O usuário ${user.login} foi salvo.\n` +
-                `\nid: ${user.id}` +
-                `\nlogin: ${user.login}` +
-                `\nNome: ${user.name}` +
-                `\nBio: ${user.bio}` +
-                `\nRepositórios públicos: ${user.public_repos}`);
+            document.getElementById('user-info').textContent = `
+Usuário ${user.login} foi salvo.
+ID: ${user.id}
+Login: ${user.login}
+Nome: ${user.name}
+Bio: ${user.bio}
+Repositórios públicos: ${user.public_repos}
+        `;
         }
     });
 }
-function showUser(username) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const user = users.find(user => user.login === username);
-        if (typeof user === 'undefined') {
-            alert('Usuario não encontrado!');
-        }
-        else {
-            const response = yield fetch(user.repos_url);
-            const repos = yield response.json();
-            let message = `id: ${user.id}\n` +
-                `\nlogin: ${user.login}` +
-                `\nNome: ${user.name}` +
-                `\nBio: ${user.bio}` +
-                `\nRepositórios públicos: ${user.public_repos}`;
-            repos.forEach(repo => {
-                message += `\nNome: ${repo.name}` +
-                    `\nDescrição: ${repo.description}` +
-                    `\nEstrelas: ${repo.stargazers_count}` +
-                    `\nÉ um fork: ${repo.fork ? 'Sim' : 'Não'}\n`;
-            });
-            alert(message);
-        }
-    });
+function showAllUsers() {
+    const userSection = document.getElementById('user-info');
+    userSection.textContent = users.map(user => `- ${user.login}`).join('\n');
 }
+function showReposTotal() {
+    const total = users.reduce((sum, user) => sum + user.public_repos, 0);
+    document.getElementById('total-repos').textContent = `Total de repositórios: ${total}`;
+}
+function showTopFive() {
+    const topFive = users.slice().sort((a, b) => b.public_repos - a.public_repos).slice(0, 5);
+    document.getElementById('top-five').textContent = topFive.map((user, index) => `${index + 1}º - ${user.login}: ${user.public_repos} repositórios`).join('\n');
+}
+document.getElementById('fetch-user').addEventListener('click', () => __awaiter(void 0, void 0, void 0, function* () {
+    const username = document.getElementById('username').value;
+    yield fetchUser(username);
+}));
+document.getElementById('show-all-users').addEventListener('click', showAllUsers);

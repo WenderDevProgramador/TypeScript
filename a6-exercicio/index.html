@@ -3,13 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>GitHub Users</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
-
-
-
-    <script src="index.js"></script>
+    <header>
+        <h1>Gerenciador de Usuários do GitHub</h1>
+        <p>Pesquise, visualize e analise dados de usuários do GitHub.</p>
+    </header>
+    <main>
+        <section id="user-form">
+            <h2>Buscar Usuário</h2>
+            <input type="text" id="username" placeholder="Digite o username do GitHub">
+            <button id="fetch-user">Buscar Usuário</button>
+            <button id="show-all-users">Exibir Todos os Usuários</button>
+        </section>
+        <section id="user-details">
+            <h2>Detalhes do Usuário</h2>
+            <pre id="user-info"></pre>
+        </section>
+        <section id="statistics">
+            <h2>Estatísticas</h2>
+            <p id="total-repos"></p>
+            <pre id="top-five"></pre>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Gerenciador de Usuários do GitHub</p>
+    </footer>
+    <script src="index.js" type="module"></script>
 </body>
 </html>

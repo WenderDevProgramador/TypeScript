@@ -5,7 +5,7 @@ interface GithubUserResponse {
     bio: string
     public_repos: number
     repos_url: string
-    message?: "Not Found"
+    message?: string
 }
 
 interface GithubRepoResponse {
@@ -22,46 +22,40 @@ async function fetchUser(username: string) {
     const user: GithubUserResponse = await response.json()
 
     if (user.message) {
-        alert('Usuário não encontrado!');
+        alert('Usuário não encontrado!')
     } else {
         users.push(user)
-
-        alert(
-            `O usuário ${user.login} foi salvo.\n` +
-            `\nid: ${user.id}` +
-            `\nlogin: ${user.login}` +
-            `\nNome: ${user.name}` +
-            `\nBio: ${user.bio}` +
-            `\nRepositórios públicos: ${user.public_repos}`
-        )
+        document.getElementById('user-info')!.textContent = `
+Usuário ${user.login} foi salvo.
+ID: ${user.id}
+Login: ${user.login}
+Nome: ${user.name}
+Bio: ${user.bio}
+Repositórios públicos: ${user.public_repos}
+        `
     }
 }
 
-async function showUser(username: string) {
-    const user = users.find(user => user.login === username)
-
-    if (typeof user === 'undefined') {
-        alert('Usuario não encontrado!')
-    } else {
-        const response = await fetch(user.repos_url)
-        const repos: GithubRepoResponse[] = await response.json()
-
-        let message = `id: ${user.id}\n` +
-            `\nlogin: ${user.login}` +
-            `\nNome: ${user.name}` +
-            `\nBio: ${user.bio}` +
-            `\nRepositórios públicos: ${user.public_repos}`
-
-        repos.forEach(repo => {
-            message += `\nNome: ${repo.name}` +
-                `\nDescrição: ${repo.description}` +
-                `\nEstrelas: ${repo.stargazers_count}` +
-                `\nÉ um fork: ${repo.fork ? 'Sim' : 'Não'}\n`
-        })
-
-        alert(message)
-    }
+function showAllUsers() {
+    const userSection = document.getElementById('user-info')!
+    userSection.textContent = users.map(user => `- ${user.login}`).join('\n')
 }
 
+function showReposTotal() {
+    const total = users.reduce((sum, user) => sum + user.public_repos, 0)
+    document.getElementById('total-repos')!.textContent = `Total de repositórios: ${total}`
+}
 
+function showTopFive() {
+    const topFive = users.slice().sort((a, b) => b.public_repos - a.public_repos).slice(0, 5)
+    document.getElementById('top-five')!.textContent = topFive.map(
+        (user, index) => `${index + 1}º - ${user.login}: ${user.public_repos} repositórios`
+    ).join('\n')
+}
 
+document.getElementById('fetch-user')!.addEventListener('click', async () => {
+    const username = (document.getElementById('username') as HTMLInputElement).value
+    await fetchUser(username)
+})
+
+document.getElementById('show-all-users')!.addEventListener('click', showAllUsers)
