@@ -31,9 +31,8 @@ interface Speeder extends Ship {
     acceleration: number
 }
 
-// Se deixássemos sem o tipo Ship desativaríamos
-// totalmente o typescript para esse argumento
-function cloneShip(ship: Ship, newName: string, newPilot: string) {
+
+function cloneShip<ShipType extends {name : string , pilot: string}>(ship: ShipType, newName: string, newPilot: string) {
     const newShip = ship
     newShip.name = newName
     newShip.pilot = newPilot
