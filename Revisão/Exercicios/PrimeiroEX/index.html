@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Naves</title>
+    <script src="dist/index.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Painel de Naves</h1>
+
+    <!-- Menu -->
+    <section id="menu">
+        <button id="btn-registrar">1 - Registrar Nave</button>
+        <button id="btn-adicionar">2 - Adicionar Tripulante</button>
+        <button id="btn-enviar">3 - Enviar em Missão</button>
+        <button id="btn-listar">4 - Listar Naves</button>
+    </section>
+
+    <!-- Formulário para registrar nave -->
+    <section id="form-registrar" class="hide">
+        <h2>Registrar Nave</h2>
+        <input type="text" id="nomeNave" placeholder="Nome da nave" />
+        <input type="text" id="pilotoNave" placeholder="Nome do piloto" />
+        <input type="number" id="limiteTripulantes" placeholder="Limite de tripulantes" />
+        <button id="confirmarRegistrar">Registrar</button>
+        <button class="voltar">Voltar</button>
+    </section>
+
+    <!-- Formulário para adicionar tripulante -->
+    <section id="form-adicionar" class="hide">
+        <h2>Adicionar Tripulante</h2>
+        <input type="text" id="nomeTripulante" placeholder="Nome do tripulante" />
+        <input type="text" id="naveDestino" placeholder="Nome da nave" />
+        <button id="confirmarAdicionar">Adicionar</button>
+        <button class="voltar">Voltar</button>
+    </section>
+
+    <!-- Formulário para enviar nave em missão -->
+    <section id="form-enviar" class="hide">
+        <h2>Enviar Nave em Missão</h2>
+        <input type="text" id="naveEnviar" placeholder="Nome da nave" />
+        <button id="confirmarEnviar">Enviar</button>
+        <button class="voltar">Voltar</button>
+    </section>
+
+    <!-- Listagem de naves -->
+    <section id="listagem" class="hide">
+        <h2>Naves Registradas</h2>
+        <div id="listaNaves"></div>
+        <button class="voltar">Voltar</button>
+    </section>
+
+    <!-- Área de mensagens -->
+    <section id="mensagens"></section>
+</body>
+
+</html>

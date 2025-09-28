@@ -1,0 +1,148 @@
+/* ====== RESET ====== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Orbitron", sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top, #0d0d0d, #050505);
+    color: #00ffe7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ====== TÍTULOS ====== */
+h1,
+h2 {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #00ffe7, 0 0 20px #008080;
+    margin-bottom: 20px;
+}
+
+/* ====== BOTÕES ====== */
+button {
+    background: transparent;
+    border: 2px solid #00ffe7;
+    color: #00ffe7;
+    padding: 12px 20px;
+    margin: 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background: #00ffe7;
+    color: #000;
+    box-shadow: 0 0 15px #00ffe7, 0 0 30px #00ffe7;
+    transform: scale(1.05);
+}
+
+/* ====== INPUTS ====== */
+input {
+    width: 100%;
+    max-width: 400px;
+    background: transparent;
+    border: 2px solid #00ffe7;
+    color: #00ffe7;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    text-align: center;
+}
+
+input::placeholder {
+    color: #00ffe7aa;
+}
+
+/* ====== SEÇÕES ====== */
+section {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #00ffe7;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 0 20px #00ffe744;
+}
+
+.hide {
+    display: none;
+}
+
+/* ====== LISTAGEM ====== */
+#listaNaves div {
+    border-bottom: 1px solid #00ffe733;
+    padding: 10px 0;
+}
+
+#listaNaves div:last-child {
+    border-bottom: none;
+}
+
+/* ====== MENSAGENS ====== */
+#mensagens {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    text-align: center;
+    color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff88, 0 0 20px #ff00ff55;
+    min-height: 24px;
+}
+
+/* ====== RESPONSIVIDADE ====== */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    section {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    button,
+    input {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    input {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+}
