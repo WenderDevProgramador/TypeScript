@@ -1,0 +1,8 @@
+
+{
+    "compilerOptions": {
+        "outDir": "public/dist",
+        "target": "es2020"
+}
+
+}

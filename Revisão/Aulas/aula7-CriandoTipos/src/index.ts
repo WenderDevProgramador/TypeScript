@@ -6,8 +6,8 @@ let option: 'Yes' | 'No' | 'Matbe'
 
 let opção: number | boolean
 
-let planet: 'Mercurio' | 'Terra' | 'Marte' | 'Neturno'
+type Planet = 'Mercurio' | 'Terra' | 'Marte' | 'Neturno'
 
-planet = "Mercurio"
+let planet: Planet
 
 
