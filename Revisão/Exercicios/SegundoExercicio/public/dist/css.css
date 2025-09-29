@@ -1,0 +1,234 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top, #0b0f29, #060913 70%);
+    color: #e0e6f7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* CABEÇALHO */
+header {
+    background: linear-gradient(90deg, #0f1a3c, #1a2348);
+    padding: 20px;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #61dafb;
+    text-shadow: 0 0 10px #61dafb;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #283469;
+}
+
+/* LAYOUT PRINCIPAL */
+main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* MENU LATERAL */
+nav {
+    width: 260px;
+    background: #11162c;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-right: 2px solid #1e2749;
+}
+
+nav button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #1e2d50;
+    color: #e0e6f7;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: 0.3s ease;
+    border: 1px solid #283469;
+}
+
+nav button:hover {
+    background: #283469;
+    color: #61dafb;
+    transform: translateX(4px);
+}
+
+/* ÁREA DE CONTEÚDO */
+section#content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* CAIXAS DE FORMULÁRIO */
+.form-container {
+    background: #1a1f36;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border: 1px solid #283469;
+}
+
+.form-container h2 {
+    margin-bottom: 15px;
+    color: #61dafb;
+    font-size: 1.3rem;
+}
+
+.form-container input,
+.form-container select {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #283469;
+    background: #101428;
+    color: #e0e6f7;
+    font-size: 1rem;
+}
+
+.form-container input:focus,
+.form-container select:focus {
+    outline: none;
+    border-color: #61dafb;
+    box-shadow: 0 0 6px #61dafb;
+}
+
+.form-container button {
+    margin-top: 10px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #283469;
+    color: #e0e6f7;
+    font-weight: bold;
+    width: 100%;
+    transition: 0.3s ease;
+}
+
+.form-container button:hover {
+    background: #61dafb;
+    color: #0b0f29;
+    transform: scale(1.03);
+}
+
+/* MENSAGENS */
+.message {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    animation: fadeIn 0.4s ease;
+}
+
+.success {
+    background: rgba(40, 167, 69, 0.2);
+    border: 1px solid #28a745;
+    color: #28a745;
+}
+
+.error {
+    background: rgba(220, 53, 69, 0.2);
+    border: 1px solid #dc3545;
+    color: #dc3545;
+}
+
+/* LISTA DE PLANETAS */
+#planetList h2 {
+    margin-bottom: 15px;
+    color: #61dafb;
+}
+
+.planet-card {
+    background: #12172a;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #283469;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    transition: 0.3s ease;
+}
+
+.planet-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
+}
+
+.planet-card h3 {
+    margin-bottom: 10px;
+    color: #61dafb;
+}
+
+.satellite-list {
+    margin-top: 8px;
+    padding-left: 18px;
+}
+
+.satellite-list li {
+    list-style: "🛰️ ";
+    margin-bottom: 4px;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 900px) {
+    main {
+        flex-direction: column;
+    }
+
+    nav {
+        flex-direction: row;
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid #1e2749;
+        overflow-x: auto;
+    }
+
+    nav button {
+        flex: 1;
+        min-width: 150px;
+    }
+}
+
+@media (max-width: 500px) {
+    header {
+        font-size: 1.3rem;
+        padding: 15px;
+    }
+
+    nav button {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    .form-container h2 {
+        font-size: 1.1rem;
+    }
+}
+
+/* ANIMAÇÃO */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

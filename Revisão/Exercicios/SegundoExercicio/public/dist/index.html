@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css.css">nk
+    <script src="index.js" defer></script>
+    <title>Sistema de Planetas</title>
+</head>
+
+<body>
+    <header>Sistema de Gerenciamento de Planetas 🌍</header>
+    <main>
+        <nav>
+            <button onclick="showSection('register')">Registrar Planeta</button>
+            <button onclick="showSection('update')">Atualizar Situação</button>
+            <button onclick="showSection('addSatellite')">Adicionar Satélite</button>
+            <button onclick="showSection('removeSatellite')">Remover Satélite</button>
+            <button onclick="listPlanets()">Listar Planetas</button>
+        </nav>
+
+        <section id="content">
+            <div id="message"></div>
+
+            <!-- Registrar Planeta -->
+            <div id="register" class="form-container" style="display:none;">
+                <h2>Registrar Novo Planeta</h2>
+                <input type="text" id="planetName" placeholder="Nome do planeta">
+                <input type="number" id="coordA" placeholder="Coordenada A">
+                <input type="number" id="coordB" placeholder="Coordenada B">
+                <input type="number" id="coordC" placeholder="Coordenada C">
+                <input type="number" id="coordD" placeholder="Coordenada D">
+                <select id="situation">
+                    <option value="">Selecione a Situação</option>
+                    <option value="habitado">Habitaro</option>
+                    <option value="habitável">Habitável</option>
+                    <option value="Inabitável">Inabitável</option>
+                    <option value="Inexplorado">Inexplorado</option>
+                </select>
+                <button onclick="firstMenuOption()">Registrar</button>
+            </div>
+
+            <!-- Atualizar Situação -->
+            <div id="update" class="form-container" style="display:none;">
+                <h2>Atualizar Situação</h2>
+                <input type="text" id="updatePlanetName" placeholder="Nome do planeta">
+                <select id="newSituation">
+                    <option value="">Selecione a Nova Situação</option>
+                    <option value="habitado">Habitaro</option>
+                    <option value="habitável">Habitável</option>
+                    <option value="Inabitável">Inabitável</option>
+                    <option value="Inexplorado">Inexplorado</option>
+                </select>
+                <button onclick="secondMenuOption()">Atualizar</button>
+            </div>
+
+            <!-- Adicionar Satélite -->
+            <div id="addSatellite" class="form-container" style="display:none;">
+                <h2>Adicionar Satélite</h2>
+                <input type="text" id="addPlanetName" placeholder="Nome do planeta">
+                <input type="text" id="satelliteName" placeholder="Nome do satélite">
+                <button onclick="thirdMenuOption()">Adicionar</button>
+            </div>
+
+            <!-- Remover Satélite -->
+            <div id="removeSatellite" class="form-container" style="display:none;">
+                <h2>Remover Satélite</h2>
+                <input type="text" id="removePlanetName" placeholder="Nome do planeta">
+                <input type="text" id="removeSatelliteName" placeholder="Nome do satélite">
+                <button onclick="fourthMenuOption()">Remover</button>
+            </div>
+
+            <!-- Lista de Planetas -->
+            <div id="planetList"></div>
+        </section>
+    </main>
+
+    
+</body>
+
+</html>
