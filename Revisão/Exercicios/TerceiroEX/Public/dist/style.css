@@ -1,0 +1,115 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0d1117, #161b22);
+    color: #f0f6fc;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* Título */
+h1 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    text-align: center;
+    background: linear-gradient(90deg, #00d4ff, #007bff, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 3s infinite linear;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 200%;
+    }
+}
+
+/* Seção de botões e input */
+section {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+/* Input */
+#usernameInput {
+    flex: 1 1 250px;
+    padding: 0.8rem;
+    border: 2px solid #30363d;
+    border-radius: 8px;
+    background: #161b22;
+    color: #f0f6fc;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+#usernameInput:focus {
+    border-color: #00d4ff;
+    box-shadow: 0 0 10px #00d4ff55;
+}
+
+/* Botões */
+button {
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #007bff, #00d4ff);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px) scale(1.02);
+    opacity: 0.9;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Área de saída */
+#output {
+    width: 100%;
+    max-width: 800px;
+    background: #161b22;
+    border: 2px solid #30363d;
+    border-radius: 12px;
+    padding: 1rem;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    box-shadow: 0 0 15px #00d4ff33;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    button {
+        flex: 1 1 100%;
+    }
+
+    #usernameInput {
+        flex: 1 1 100%;
+    }
+}
